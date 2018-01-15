@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{graphicx}
+\usepackage{pslatex}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{longtable}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\setlength{\LTcapwidth}{5.5 in}
+\usepackage{url}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{gensymb}
+\usepackage[absolute]{textpos}
+
+\title{Exploring Spectral Analysis: PSET~5}
+\author{
+        Benjamin Getraer \\
+        GEO~422:~Data, Models, \& Uncertainty in the Natural Sciences\\
+}
+\date{\today}
+
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This is the paper's abstract \ldots
+\end{abstract}
+
+\section{Introduction}
+Introduction
+
+\paragraph{Outline}
+The remainder of this article is organized as follows.
+Section~\ref{sec:Nyquist} introduces the implications of sampling and aliasing.
+Our new and exciting results are described in Section~\ref{results}.
+Finally, Section~\ref{conclusions} gives the conclusions.
+
+\section{Nyquist Sampling}\label{sec:Nyquist}
+Nyquist sampling follows the theorem that for a given signal $f(\rm{x})$ composed of frequencies $\underline{\omega}$, $f(\rm{x})$ can be recovered using a sampling rate of $\frac{1}{\Delta\rm{x}}\ge2\times \omega_{\text{max}}$.
+\begin{figure}[h!]
+\centering
+
+\includegraphics[height=0.6\linewidth]{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET5/Nyquist.pdf}
+
+\caption{Sampling (in red) of the signal $f(\rm{x})=\cos(2\pi\times\rm{x}) +\sin(2\pi\times2\rm{x}) +\sin(2\pi\times5.6\rm{x})$ (in blue) at various sampling rates, where ``Nyquist Sampling'' is defined as a sampling rate of $\frac{1}{\Delta\rm{x}}=2\times5.6$.}
+\end{figure}
+
+
+
+
+
+\section{Results}\label{results}
+In this section we describe the results.
+
+\section{Conclusions}\label{conclusions}
+We worked hard, and achieved very little.
+
+\end{document}

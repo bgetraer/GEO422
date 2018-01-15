@@ -1,0 +1,14 @@
+*.eps
+*.lot
+*.log
+*.lof
+*.aux
+*.toc
+*.bbl
+*.blg
+*.dvi
+*.snm
+*.nav
+*.out
+*.DS_Store
+*.*~

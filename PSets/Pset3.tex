@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+% packages that I call bc they are in the template I have and I don't know if I want them or not.
+\widowpenalty=10000 
+\clubpenalty=10000 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{graphicx}
+\usepackage{pslatex}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{longtable}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\setlength{\LTcapwidth}{5.5 in}
+\usepackage{url}
+\usepackage{lastpage}
+\usepackage{lineno}
+\usepackage[english]{babel}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage[round, sort, numbers, authoryear]{natbib}
+\usepackage{hyperref}
+\usepackage{gensymb}
+\hypersetup{colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=Mahogany,%
+urlcolor=MidnightBlue,%
+pdftex}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+ \rhead {\emph{\textcolor{blue}{bgetraer}, \thepage ~of
+     \pageref{LastPage}}}
+
+ \lhead{\footnotesize \textsc{GEO~422$/$PSET~3}}
+ 
+ \cfoot{}
+ \renewcommand{\headrulewidth}{0.4pt} 
+
+
+
+
+
+\begin{document}
+
+\section*{Acceleration of Gravity}
+
+I ran the model with over 20 different position vectors, but will present results from one of them. Results were not obviously different between the different tests.
+
+$g = 10.2902$
+
+\section*{$C_d$ and $C_m$}
+
+$C_d$ is a square matrix of size $NxN$ where $N=$ number of position points, symmetrical about the diagonal with only positive values along the diagonal, consistent with expected properties of covariance.
+
+$C_m$ is also square matrix of size $mxm$ where $m=$ number of model paremeters. Although I expect $C_m$ to also be symmetrical about the diagonal with only positive values along the diagonal, this is not the case. I believe this is due to $G^{-g}$ being ``near-singular'' for the tests I have run. 
+
+\section*{\^{m}$_{5}$}
+The model \^{m}$_{5}$ weighted by the $C_d$ co-variance matrix is essentially identical in parameter values to the model \^{m}$_{1}$.
+
+\section*{$\chi^{2}$ Test}
+The $\chi^{2}$ test also had peculiar results that were hard to interpret. Using the individual variances of each point (i.e. the diagonal values of $C_d$) as the denominator led to $\chi^{2} = N$ value equal to $N$. Using the variance of all of the residuals as the denominator led to a $\chi^{2} = N-1$. In my case, $N = 20$. I am not certain which value is correct, but the phenomena puzzles me. Oddly, calculating residuals using an arbitrary function, such as $error = d(t) - sin(t)$ or $error = d(t) - t$ led to reasonable $\chi^{2}$ values of about $23$, and only extremes such as $error = d(t) - rand$ were clearly rejected. There seems to be a peculiar circular logic to scaling residuals by their relative length, such that continuous functions with nearby values are not easily rejected by the $\chi^{2}$ test.
+
+\section*{Confidence Intervals}
+My $95\%$ confidence intervals for model parameters were extremely small: For $m_1$, $0.0144e-08$, for $m_2$, $0.0694e-08$, for $m_3$, $0.1725e-08$. Significantly, due to the issues with $C_m$ not always being positive on the diagonal and not being symmetric, I suspect that singularity in the inversion process also skewed these results.
+
+
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]
+{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET3/model.pdf}
+\caption[]{The two (indistinguishable) models fit to a set of height points.} \label{fig:model}
+\end{figure}
+
+
+
+
+\end{document}
+
+
+This is never printed

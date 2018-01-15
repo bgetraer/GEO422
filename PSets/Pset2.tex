@@ -1,0 +1,151 @@
+\documentclass[12pt]{article}
+% packages that I call bc they are in the template I have and I don't know if I want them or not.
+\widowpenalty=10000 
+\clubpenalty=10000 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{graphicx}
+\usepackage{pslatex}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{longtable}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\setlength{\LTcapwidth}{5.5 in}
+\usepackage{url}
+\usepackage{lastpage}
+\usepackage{lineno}
+\usepackage[english]{babel}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage[round, sort, numbers, authoryear]{natbib}
+\usepackage{hyperref}
+\usepackage{gensymb}
+\hypersetup{colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=Mahogany,%
+urlcolor=MidnightBlue,%
+pdftex}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+ \rhead {\emph{\textcolor{blue}{bgetraer}, \thepage ~of
+     \pageref{LastPage}}}
+
+ \lhead{\footnotesize \textsc{GEO~422$/$PSET~2}}
+ 
+ \cfoot{}
+ \renewcommand{\headrulewidth}{0.4pt} 
+
+
+
+
+
+\begin{document}
+
+\section{Convolution of Uniform Distributions}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]
+{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET2/Fig1.pdf}
+\caption[]{Convolutions of uniform pdf (red) compared to the Gaussian pdf (black). All pdf's are adjusted for $\mu=0$ and $\sigma^2=1$. Note the clear convergence of the convolved pdf to the Gaussian pdf, demonstrating the Central Limit Theorem.} \label{fig:ConvUnif}
+\end{figure}
+
+
+
+\newpage
+\section{Convolution of Non-Uniform Distributions}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]
+{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET2/Fig21.pdf}
+\quad
+\includegraphics[width=1\textwidth]
+{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET2/Fig22.pdf}
+\caption[]{Convolutions of non-uniform pdf's (red) compared to the Gaussian pdf (black). Top: A semi-circular pdf convolved with a step-shaped pdf; Bottom: An exponential-shaped pdf convolved with a house-shaped pdf. Note that despite having different and somewhat arbitrary shape and location, there is still convergence to the Gaussian pdf after 30 convolutions.} \label{fig:ConvNonUnif}
+\end{figure}
+\newpage
+\section{$\chi^2$ Test Against ``TRUE'' Distribution}
+Demonstration of $\chi^2$ test of whether random samples of a normally distributed population came from that ``TRUE'' population. Sample frequency in binned areas was compared to ``TRUE'' frequency of the area under the pdf curve within those bin edges (Figure~\ref{fig:ChiTrue1}) and a $\chi^2$ value was calculated using {\bf equation~(6)}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]
+{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET2/Fig31.pdf}
+\caption[]{Example of samples drawn (blue histogram) compared to the pdf from which they were taken (red line).} \label{fig:ChiTRUE1}
+\end{figure}
+
+The test is done by comparing the $\chi^2$ value from our samples to the $\chi^2_{k-3}$ pdf. The probability of obtaining a higher $\chi^2$ value than the one observed is calculated from the area under the curve of the $\chi^2_{k-3}$ pdf from the $\chi^2$ to $\infty$ (Figure~\ref{fig:ChiTRUE2}).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]
+{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET2/Fig32.pdf}
+\caption[]{Example an observed $\chi^2$ value compared to the $\chi^2_{k-3}$ pdf, with the shaded area representing the probability used in the test.} \label{fig:ChiTRUE2}
+\end{figure}
+
+SOME RESULTS FROM (3):
+\\Gaussian compared to TRUE distribution: $1000$ samples
+\\fraction that pass at $95\%$ confidence
+\\	$0.7540$
+\\	$0.7550$
+\\	$0.7640$
+\\	$0.7490$
+\\
+\\" " " at $80\%$ confidence
+\\	$0.5340$
+\\	$0.5080$
+\\	$0.5420$
+\\	$0.5440$
+
+
+\newpage
+\section{$\chi^2$ Test Against ``FALSE'' Distribution}
+Demonstration of $\chi^2$ test of whether random samples pulled from a Rayleigh pdf came from a ``FALSE'' population (i.e. a Gaussian pdf of the same $\mu$ and $\sigma^2$). Sample frequency in binned areas was compared to ``FALSE'' frequency of the area under the pdf curve within those bin edges (Figure~\ref{fig:ChiFALSE1}) and a $\chi^2$ value was calculated using {\bf equation~(6)}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]
+{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET2/Fig44.pdf}
+\caption[]{Example of samples drawn (blue histogram) compared to the ``FALSE'' pdf from which they were NOT taken (red line).} \label{fig:ChiFALSE1}
+\end{figure}
+
+SOME RESULTS FROM (4)
+\\Rayleigh distribution compared to Gaussian: $95\%$ confidence
+\\$50$ samples
+\\	$0.5060$
+\\	$0.4760$
+\\	$0.4940$
+\\$75$ samples
+\\	$0.4690$
+\\	$0.4480$
+\\	$0.4400$
+\\$100$ samples
+\\	$0.3540$
+\\	$0.3750$
+\\	$0.3550$
+\\$250$ samples
+\\	$0.1410$
+\\	$0.1310$
+\\	$0.1210$
+\\$500$ samples
+\\	$0.0210$
+\\	$0.0180$
+\\	$0.0190$
+\\$750$ samples
+\\	$0.0030$
+\\	$0$
+\\	$0.0020$
+\\$1000$ samples
+\\	none pass
+
+
+\end{document}
+
+
+This is never printed
