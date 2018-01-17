@@ -45,7 +45,8 @@ fhigh = f1(xhigh) + f2(xhigh) + f3(xhigh);
 [PSD_low,X_low] = prdgram(flow,lowrate);
 [PSD_high,X_high] = prdgram(fhigh,highrate);
 
-%% plot the sampling examples
+save('synthetic','x','f','NQrate','xNQ','fNQ')
+%% PLOTTING
 fig1 = figure(1);
 clf
 subplot(2,3,1); hold on;
@@ -98,33 +99,3 @@ plot(X_high,PSD_high,'linewidth',1.5)
 xlabel('$frequency$','interpreter','latex');ylabel('PSD','interpreter','latex')
 grid on
 set(gca,'fontsize',12)
-
-%% 
-%% FUNCTIONS
-
-function [PSD,X] = prdgram(sampled_signal,sample_rate)
-%PRDGRAM Takes a sampled signal and returns the Power Spectral Density
-%   estimate using the default parameters of PERIODGRAM, along with a 
-%   length normalized X frequency variable.
-%
-%   See also: PERIODGRAM
-[PSD,X] = periodogram(sampled_signal,rectwin(length(sampled_signal)),...
-    max(256,2^nextpow2(length(sampled_signal))),sample_rate);
-end
-
-function [vline_handle] = vline(x_values,ylimit,style)
-%VLINE Plots vertical lines at given values of x for a given ylimit
-%
-
-defval('style','-')
-
-% put in form [x1 x1 nan nan x2 x2 nan nan etc]
-x1 = [x_values; nan(1,length(x_values))]; 
-x2 = [x1(:)';x1(:)'];
-X = x2(:);
-
-% put in form [y1 y2 nan nan y1 y2 nan nan etc]
-Y = repmat([ylimit nan nan],1,length(x_values));
-
-vline_handle = plot(X,Y,style);
-end

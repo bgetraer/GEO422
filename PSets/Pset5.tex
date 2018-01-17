@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 
+% packages
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -18,7 +19,10 @@
 \usepackage{hyperref}
 \usepackage{gensymb}
 \usepackage[absolute]{textpos}
+\usepackage{color}
+\usepackage[export]{adjustbox}
 
+% frontmatter
 \title{Exploring Spectral Analysis: PSET~5}
 \author{
         Benjamin Getraer \\
@@ -26,7 +30,28 @@
 }
 \date{\today}
 
+% It's nice to have a header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+ \rhead {\textcolor{blue}{\href{mailto:bgetraer@princeton.edu}{Benjamin Getraer}}, \thepage ~of
+     \pageref{LastPage}}
+ \lhead{\footnotesize \textsc{GEO 422, Lab 05}}
+ \cfoot{}
+ \renewcommand{\headrulewidth}{0.4pt} 
 
+% Now setup margins and linespacing
+\textwidth = 6.75 in
+\textheight = 9.0 in
+\addtolength{\voffset}{-0.04in} 
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin =  0.0 in
+\headheight = 0.1 in
+\headwidth = 6.5 in
+\headsep = 0.15 in
+\parskip = 0.025 in
+\parindent = 0.0 in
+\linespread{1.25}
 
 \begin{document}
 \maketitle
@@ -40,21 +65,56 @@ Introduction
 
 \paragraph{Outline}
 The remainder of this article is organized as follows.
-Section~\ref{sec:Nyquist} introduces the implications of sampling and aliasing.
+Section~\ref{sec:synthetic} introduces the implications of sampling and aliasing.
 Our new and exciting results are described in Section~\ref{results}.
 Finally, Section~\ref{conclusions} gives the conclusions.
 
-\section{Nyquist Sampling}\label{sec:Nyquist}
+\section{Sampling and Recovery of Synthetic Signals}\label{sec:synthetic}
 Nyquist sampling follows the theorem that for a given signal $f(\rm{x})$ composed of frequencies $\underline{\omega}$, $f(\rm{x})$ can be recovered using a sampling rate of $\frac{1}{\Delta\rm{x}}\ge2\times \omega_{\text{max}}$.
+
 \begin{figure}[h!]
 \centering
-
 \includegraphics[height=0.6\linewidth]{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET5/Nyquist.pdf}
-
 \caption{Sampling (in red) of the signal $f(\rm{x})=\cos(2\pi\times\rm{x}) +\sin(2\pi\times2\rm{x}) +\sin(2\pi\times5.6\rm{x})$ (in blue) at various sampling rates, where ``Nyquist Sampling'' is defined as a sampling rate of $\frac{1}{\Delta\rm{x}}=2\times5.6$.}
+\label{fig:nyquist}
+\end{figure}
+
+\section{Recovery of Unknown Signals}\label{sec:unknown}
+The recovery of unknown signals from measurements can be approached in a similar fashion, with the sampling rate significantly affecting the frequencies detected in the signal. For instance, Figure~\ref{fig:yearly} shows a time-series measured annually, while Figure~\ref{fig:decadal} shows a time-series of the same phenomena measured every 10 years. The general process of analysis for each time-series went as follows: 
+
+\begin{enumerate}
+\item The data $\underline{\textbf{d}}$ were centered about their mean $\mu$, and normalized by their variance $\sigma^2$ such that the normalized data $\underline{\textbf{d}}^{\prime}=(\underline{\textbf{d}}-\mu)/ \sqrt{\sigma^2}$.
+\item The power-spectral-density of the $\underline{\textbf{d}}^{\prime}$ signal frequencies $\underline{\omega}$ were estimated by Fourier transform.
+\item Periodic structures in the signal were estimated by the element-wise inversion of period $\mathrm{L}={\omega}^{-1}$.
+\end{enumerate}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.6\linewidth]{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET5/years.pdf}
+\caption{Analysis of time-series given in \href{http://geoweb.princeton.edu/people/simons/YEARLY.PLT}{\texttt{YEARLY.PLT}}. On top are the data $\underline{\textbf{d}}$ with a normalized axis on the right showing the dimensions of $\underline{\textbf{d}}^{\prime}$ (see Section~\ref{sec:unknown}). On bottom left is the power-spectral-density (PSD) of the $\underline{\textbf{d}}^{\prime}$ signal frequencies estimated by \href{https://www.mathworks.com/help/signal/ref/periodogram.html}{\texttt{PERIODOGRAM}}, using the default box-car window. Inversion of the frequency shows periodic structure within the data around the 10 and 100 year time-scales (bottom right).}
+\label{fig:yearly}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\linewidth]{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET5/decadal.pdf}
+\caption{Analysis of time-series given in \href{http://geoweb.princeton.edu/people/simons/DECADAL.PLT}{\texttt{DECADAL.PLT}}. On top are the data $\underline{\textbf{d}}$ with a normalized axis on the right showing the dimensions of $\underline{\textbf{d}}^{\prime}$ (see Section~\ref{sec:unknown}). On bottom left is the power-spectral-density (PSD) of the $\underline{\textbf{d}}^{\prime}$ signal frequencies estimated by \href{https://www.mathworks.com/help/signal/ref/periodogram.html}{\texttt{PERIODOGRAM}}, using the default box-car window. Inversion of the frequency shows periodic structure within the data around the 10 and 100 year time-scales (bottom right).}
+\label{fig:decadal}
 \end{figure}
 
 
+\begin{figure}[h!]
+\includegraphics[width=0.5\linewidth]{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET5/windowfunc.pdf}
+\caption{Examples of various windowing functions, over the domain [$-1$,$1$], of length 1000.}
+\label{fig:windows}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics[width=0.5\linewidth]{/Users/benjamingetraer/Documents/Fall2017/GEO422/Figures/PSET5/windows.pdf}
+\caption{Demonstration of various windowing functions, using \href{https://www.mathworks.com/help/signal/ref/periodogram.html}{\texttt{PERIODOGRAM}} and the \href{http://geoweb.princeton.edu/people/simons/YEARLY.PLT}{\texttt{YEARLY.PLT}} dataset. Note that the shape of the estimated PSD is different for each window function, but that all show peaks at frequencies $\omega=0.1$, $0.09$, $0.0117$ corresponding to periods of $\mathrm{L}=10$, $11.1$, $85.5$ years.}
+\label{fig:windows}
+\end{figure}
 
 
 
